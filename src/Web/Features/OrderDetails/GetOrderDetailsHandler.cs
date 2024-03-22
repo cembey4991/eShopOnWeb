@@ -28,6 +28,7 @@ public class GetOrderDetailsHandler : IRequestHandler<GetOrderDetails, OrderDeta
 
         return new OrderDetailViewModel
         {
+            Status=order.Status,
             OrderDate = order.OrderDate,
             OrderItems = order.OrderItems.Select(oi => new OrderItemViewModel
             {

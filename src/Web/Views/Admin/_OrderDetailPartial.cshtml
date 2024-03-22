@@ -1,0 +1,71 @@
+@model OrderDetailViewModel
+@{
+    Layout="";
+}
+
+<form  asp-controller="Admin"  asp-action="OrderUpdate" method="post" id="form-order-update">
+    <input type="hidden" asp-for="@Model.OrderNumber">
+<div class="esh-orders-detail">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">Order number</div>  
+            <div class="col-md-3">Date</div>  
+            <div class="col-md-3">Total</div>  
+            <div class="col-md-3">Status</div>  
+        </div>
+        <div class="row">
+            <div class="col-md-3">@Model.OrderNumber</div>  
+            <div class="col-md-3">@Model.OrderDate</div>  
+            <div class="col-md-3">$@Model.Total.ToString("N2")</div>  
+            <div class="col-md-3">@Model.Status</div>  
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">Shipping Address</div>  
+            <div class="col-md-3">@Model.ShippingAddress?.Street</div>  
+            <div class="col-md-3">@Model.ShippingAddress?.City</div>  
+            <div class="col-md-3">@Model.ShippingAddress?.Country</div>  
+
+        </div>
+      
+      <div class="row">ORDER DETAILS</div>
+       <div class="row">
+            @for (int i = 0; i < Model.OrderItems.Count; i++)
+            {
+                var item = Model.OrderItems[i];
+                 <div class="col-md-4">  <img class="esh-orders-detail-image" src="@item.PictureUrl"></div>
+                 <div class="col-md-3">@item.ProductName</div>
+                <div class="col-md-1">$ @item.UnitPrice.ToString("N2")</div>
+                <div class="col-md-1">@item.Units</div>
+                <div class="col-md-2">$ @Math.Round(item.Units * item.UnitPrice, 2).ToString("N2")</div>
+               
+            }
+        </div>
+        <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2">TOTAL</div>
+        </div>
+         <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2">$ @Model.Total.ToString("N2")</div>
+        </div>
+     
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+    <button id="btn-order-update" form="form-order-update" class="btn btn-primary">Onayla</button>
+</div>
+
+</form>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+     <script src="~/js/all.js"></script>
+
+
+
+

@@ -31,8 +31,8 @@ public class OrderController : Controller
     [HttpGet("{orderId}")]
     public async Task<IActionResult> Detail(int orderId)
     {
-        Guard.Against.Null(User?.Identity?.Name, nameof(User.Identity.Name));
-        var viewModel = await _mediator.Send(new GetOrderDetails(User.Identity.Name, orderId));
+        //Guard.Against.Null(User?.Identity?.Name, nameof(User.Identity.Name));
+        var viewModel = await _mediator.Send(new GetOrderDetails(orderId));
 
         if (viewModel == null)
         {
